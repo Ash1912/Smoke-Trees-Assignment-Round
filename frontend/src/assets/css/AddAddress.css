@@ -1,0 +1,91 @@
+/* Container for the entire form */
+.form-container {
+    width: 40%;  /* Keep it small as required */
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;  /* Flexbox layout */
+    flex-direction: column;
+    align-items: center;  /* Center items horizontally */
+    margin: 0 auto; /* Center container horizontally */
+    justify-content: center; /* Ensure form content is centered vertically */
+}
+
+/* Form title styling */
+.form-title {
+    text-align: center;
+    font-size: 24px; /* Increased font size for better visibility */
+    font-weight: bold;
+    margin-bottom: 18px;
+    color: #333;
+}
+
+/* Form styling */
+.address-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;  /* Ensures inputs take the full width of the form */
+}
+
+/* Input and Select styling */
+.form-input, .form-select {
+    padding: 12px 15px; /* Increased padding for better touch targets */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #fff;
+    color: #333;
+    width: 100%;  /* Takes full width within the container */
+    box-sizing: border-box;
+}
+
+/* Styling for focus effect */
+.form-input:focus, .form-select:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Added subtle shadow on focus */
+}
+
+/* Button styling */
+.form-button {
+    padding: 12px 15px; /* Adjusted padding for better touch targets */
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px; /* Increased font size */
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.form-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px); /* Slight lift on hover for effect */
+}
+
+/* Success and Error messages */
+.success-message, .error-message {
+    margin-bottom: 15px; /* Space between messages and form */
+    font-size: 14px; /* Adjust font size for messages */
+    width: 100%; /* Ensure messages take full width */
+    text-align: center; /* Center text */
+}
+
+.success-message {
+    color: #28a745; /* Green color for success */
+}
+
+.error-message {
+    color: #dc3545; /* Red color for errors */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .form-container {
+        width: 85%;  /* Adjusted for smaller screens */
+    }
+}

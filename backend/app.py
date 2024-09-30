@@ -20,7 +20,7 @@ def create_tables():
     db.create_all()
 
 # API routes
-@app.route('/api/users', methods=['POST'])
+@app.route('/api/addusers', methods=['POST'])
 def add_user():
     try:
         data = request.json
@@ -28,6 +28,7 @@ def add_user():
         db.session.add(new_user)
         db.session.commit()
 
+        addresses = []
         for address in data['addresses']:
             new_address = Address(
                 street=address['street'],
@@ -38,13 +39,25 @@ def add_user():
                 user_id=new_user.id
             )
             db.session.add(new_address)
-        
+            addresses.append({
+                "street": new_address.street,
+                "city": new_address.city,
+                "state": new_address.state,
+                "zip_code": new_address.zip_code,
+                "country": new_address.country
+            })
+
         db.session.commit()
-        return jsonify({"message": "User and addresses added successfully!"}), 201
+        return jsonify({
+            "id": new_user.id,
+            "name": new_user.name,
+            "addresses": addresses,
+            "message": "User and addresses added successfully!"
+        }), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@app.route('/api/users', methods=['GET'])
+@app.route('/api/getusers', methods=['GET'])
 def get_users():
     try:
         users = User.query.all()
@@ -67,7 +80,7 @@ def get_users():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/users/<int:user_id>', methods=['GET'])
+@app.route('/api/getusers/<int:user_id>', methods=['GET'])
 def get_user_by_id(user_id):
     try:
         user = User.query.get_or_404(user_id)
@@ -88,17 +101,17 @@ def get_user_by_id(user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 404
 
-@app.route('/api/users/<int:user_id>', methods=['DELETE'])
+@app.route('/api/getusers/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     try:
         user = User.query.get_or_404(user_id)
         db.session.delete(user)
         db.session.commit()
-        return jsonify({"message": "User deleted successfully!"}), 204
+        return jsonify({"message": "User deleted successfully!"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 404
 
-@app.route('/api/users/<int:user_id>', methods=['PUT'])
+@app.route('/api/getusers/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     try:
         user = User.query.get_or_404(user_id)
@@ -109,14 +122,16 @@ def update_user(user_id):
         # Update addresses if provided
         if 'addresses' in data:
             for address_data in data['addresses']:
-                address = Address.query.get(address_data['id'])
+                address = Address.query.filter_by(id=address_data.get('id'), user_id=user.id).first()
                 if address:
+                    # Update existing address
                     address.street = address_data.get('street', address.street)
                     address.city = address_data.get('city', address.city)
                     address.state = address_data.get('state', address.state)
                     address.zip_code = address_data.get('zip_code', address.zip_code)
                     address.country = address_data.get('country', address.country)
                 else:
+                    # Add new address
                     new_address = Address(
                         street=address_data['street'],
                         city=address_data['city'],
@@ -129,6 +144,41 @@ def update_user(user_id):
 
         db.session.commit()
         return jsonify({"message": "User updated successfully!"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    
+# New route to add address to existing user
+@app.route('/api/addresses', methods=['POST'])
+def add_address():
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+
+        # Ensure the user exists
+        user = User.query.get_or_404(user_id)
+
+        # Create a new address for the user
+        new_address = Address(
+            street=data['street'],
+            city=data['city'],
+            state=data['state'],
+            zip_code=data['zip_code'],
+            country=data['country'],
+            user_id=user.id
+        )
+        db.session.add(new_address)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Address added successfully!",
+            "address": {
+                "street": new_address.street,
+                "city": new_address.city,
+                "state": new_address.state,
+                "zip_code": new_address.zip_code,
+                "country": new_address.country
+            }
+        }), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 

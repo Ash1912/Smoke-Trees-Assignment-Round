@@ -1,0 +1,88 @@
+/* The form container */
+.form-container {
+    width: 100%; /* Full width to center properly */
+    max-width: 800px; /* Limit max width */
+    margin: 40px auto; /* Center the container and add more space at the top */
+    padding: 40px;
+    background-color: #ffffff; /* White background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Softer shadow for better visual */
+    flex-grow: 1; /* Allow the container to grow */
+    overflow-y: auto; /* Makes the form scrollable if it exceeds max height */
+}
+
+/* Form title */
+h2.form-title {
+    text-align: center;
+    font-size: 28px; /* Slightly larger title */
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: bold; /* Make the title stand out */
+}
+
+/* Address section grouping */
+.address-section {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #fafafa; /* Light grey background for address section */
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px; /* Add more space between form groups */
+}
+
+/* Input field styles */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px; /* Larger text for better readability */
+    background-color: #fdfdfd; /* Soft background for inputs */
+}
+
+/* Button styles */
+.btn {
+    padding: 12px 24px; /* More padding for larger buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Responsiveness for smaller devices */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+    
+    .btn {
+        width: 100%; /* Buttons take full width on mobile */
+        margin-bottom: 10px;
+    }
+}
