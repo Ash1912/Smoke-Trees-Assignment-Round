@@ -22,7 +22,7 @@ This project is an Address Management System that allows users to add and manage
 - **Frontend**: React, Axios
 - **Styling**: CSS
 - **Others**: Postman (for testing APIs)
-- 
+
 ## Installation
 
 ### Backend Setup
@@ -80,9 +80,9 @@ The frontend will run on
 http://localhost:3000
 ```
 
-##Project Structure
+## Project Structure
 
-###Backend Directory Structure
+### Backend Directory Structure
 
 ```bash
 backend/
@@ -94,7 +94,7 @@ backend/
 └── models.py
 ```
 
-###Frontend Directory Structure
+### Frontend Directory Structure
 
 ```bash
 frontend/
@@ -112,34 +112,34 @@ frontend/
 │   └── package.json     # React dependencies
 ```
 
-##API Endpoints
+## API Endpoints
 
-###Users
+### Users
 -GET /api/getusers - Fetch all users
 -POST /api/addusers - Add a new user (requires name in the request body)
 
-###Addresses
+### Addresses
 -POST /api/addresses - Add a new address associated with a user (requires street, city, state, zip_code, country, and user_id in the request body)
 
-##Frontend Usage
-1.**Home Page**:
+## Frontend Usage
+1. **Home Page**:
 
 Navigate to the home page where you can add a new address for a selected user.
 The application allows you to select a user from the dropdown and enter the address details.
 
-2.**Add User Submit Form**:
+2. **Add User Submit Form**:
 
 After filling out the form, click the "Register" button.
 
-3.**View Users**:
+3. **View Users**:
 
 Upon successful submission, you will be redirected to the User List page to view all users and their associated addresses.
 
-##Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or create an issue to suggest changes or report bugs.
 
-##License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 ```bash
